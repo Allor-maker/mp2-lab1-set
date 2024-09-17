@@ -15,7 +15,7 @@ TBitField::TBitField(int len)
     }
     else
     {
-        MemLen = ((len + sizeof(int) * 8 - 1) / (sizeof(int) * 8));
+        MemLen = ((len + size - 1) / size);
         BitLen = len;
         pMem = new TELEM[MemLen];
         for (int i = 0; i < MemLen; ++i)
@@ -23,7 +23,6 @@ TBitField::TBitField(int len)
             pMem[i] = 0;
         }
     }
-    
 }
 
 TBitField::TBitField(const TBitField &bf):MemLen(bf.MemLen),BitLen(bf.BitLen) // конструктор копирования
@@ -43,7 +42,7 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    int ind = n / (sizeof(int) * 8);
+    int ind = n / size;
     return ind;
 }
 
@@ -69,7 +68,7 @@ void TBitField::SetBit(const int n) // установить бит
     }
     else
     {
-        pMem[n / (sizeof(int) * 8)] = (pMem[n / (sizeof(int) * 8)] | GetMemMask(n));
+        pMem[GetMemIndex(n)] = (pMem[GetMemIndex(n)] | GetMemMask(n));
     }
 }
 
@@ -82,7 +81,7 @@ void TBitField::ClrBit(const int n) // очистить бит
     else
     {
         TELEM mask = TBitField::GetMemMask(n);
-        pMem[n / (sizeof(int) * 8)] = pMem[n / (sizeof(int) * 8)] ^ mask;
+        pMem[GetMemIndex(n)] = pMem[GetMemIndex(n)] ^ mask;
     }
 }
 
@@ -95,7 +94,7 @@ int TBitField::GetBit(const int n) const // получить значение б
     else
     {
         TELEM mask = (1 << (BitLen - n -1));//32 - длина маски в битах
-        if ((pMem[n / (sizeof(int) * 8)] | mask) == pMem[n / (sizeof(int) * 8)])
+        if ((pMem[GetMemIndex(n)] | mask) == pMem[GetMemIndex(n)])
             return 1;
         else
             return 0;
@@ -132,9 +131,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
         }
     }
     if (fl == 0)
-    {
         return 1;
-    }
     else
         return 0;
   }
