@@ -15,6 +15,7 @@ TBitField::TBitField(int len)
     }
     else
     {
+        size = sizeof(int) * 8;
         MemLen = ((len + size - 1) / size);
         BitLen = len;
         pMem = new TELEM[MemLen];
@@ -25,7 +26,7 @@ TBitField::TBitField(int len)
     }
 }
 
-TBitField::TBitField(const TBitField &bf):MemLen(bf.MemLen),BitLen(bf.BitLen) // конструктор копирования
+TBitField::TBitField(const TBitField &bf):MemLen(bf.MemLen),BitLen(bf.BitLen),size(bf.size) // конструктор копирования
 {
     this->pMem = new TELEM[MemLen];
 
