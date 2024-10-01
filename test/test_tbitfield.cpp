@@ -17,13 +17,13 @@ TEST(TBitField, can_get_length)
 TEST(TBitField, new_bitfield_is_set_to_zero)
 {
   TBitField bf(100);
-
+  
   int sum = 0;
   for (int i = 0; i < bf.GetLength(); i++)
   {
     sum += bf.GetBit(i);
   }
-
+  
   EXPECT_EQ(0, sum);
 }
 
@@ -147,7 +147,7 @@ TEST(TBitField, compare_equal_bitfields_of_equal_size)
     bf1.SetBit(i);
   }
   bf2 = bf1;
-
+  
   EXPECT_EQ(bf1, bf2);
 }
 
@@ -225,20 +225,21 @@ TEST(TBitField, and_operator_applied_to_bitfields_of_non_equal_size)
 
 TEST(TBitField, can_invert_bitfield)
 {
+    
   const int size = 2;
   TBitField bf(size), negBf(size), expNegBf(size);
-  // bf = 01
+  // bf = 01  
   bf.SetBit(1);
   negBf = ~bf;
 
-  // expNegBf = 10
+  // expNegBf = 10 
   expNegBf.SetBit(0);
 
   EXPECT_EQ(expNegBf, negBf);
 }
 
 TEST(TBitField, can_invert_large_bitfield)
-{
+{  
   const int size = 38;
   TBitField bf(size), negBf(size), expNegBf(size);
   bf.SetBit(35);
@@ -308,4 +309,11 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+TEST(TBitField, can_set_bit_from_istr)
+{
+    TBitField elem1(10);
+    cin >> elem1;
+    std::cout << elem1 << std::endl;
+
 }
