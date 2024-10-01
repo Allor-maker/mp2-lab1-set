@@ -121,10 +121,26 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
+    int elem;
+    int count;
+    std::cout << "how many elements should be present in the set" << std::endl;
+    std::cin >> count;
+    std::cout << "List the numbers of elements that are present in the set" << std::endl;
+    for (int i = 0; i < count; i++)
+    {
+        istr >> elem;
+        s.BitField.SetBit(elem);
+    }
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+    ostr <<"cardinality of set = "<<s.MaxPower << std::endl;
+    for (int i = 0; i < s.MaxPower; i++)
+    {
+        ostr << s.BitField.GetBit(i);
+    }
+    ostr << std::endl;
     return ostr;
 }

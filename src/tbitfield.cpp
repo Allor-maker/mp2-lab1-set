@@ -7,6 +7,7 @@
 
 #include "tbitfield.h"
 
+
 TBitField::TBitField(int len)
 {
     if (len < 0)
@@ -15,14 +16,18 @@ TBitField::TBitField(int len)
     }
     else
     {
-        size = sizeof(int) * 8;
+        size = sizeof(TELEM) * 8;   
         MemLen = ((len + size - 1) / size);
         BitLen = len;
         pMem = new TELEM[MemLen];
-        for (int i = 0; i < MemLen; ++i)
+        //std::cout << *this;
+
+        for (int i = 0; i < MemLen; i++)
         {
             pMem[i] = 0;
+            //std::cout << pMem[i];
         }
+        
     }
 }
 
@@ -214,10 +219,22 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+    int bit;
+    istr >> bit;
+    bf.SetBit(bit);
     return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-    return ostr;
+    ostr << "size = " << bf.size << std::endl;
+    ostr << "BitLen = " << bf.BitLen << std::endl;
+    ostr << "MemLen = " << bf.MemLen << std::endl;
+
+   for (int i = 0; i < bf.BitLen; i++)
+   {
+       ostr << bf.GetBit(i);
+   }
+   ostr << std::endl;
+   return ostr;
 }
