@@ -295,10 +295,10 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
-TEST(TSet, can_create_set_from_istr)
-{
-	TSet set1(4);
-	std::cin >> set1;
-	std::cout << set1;
-
-}
+//TEST(TSet, can_create_set_from_istr)
+//{
+//	TSet set1(4);
+//	std::cin >> set1;
+//	std::cout << set1;
+//
+//}

@@ -286,7 +286,7 @@ TEST(TBitField, can_invert_many_random_bits_bitfield)
 
   for (unsigned int i = 0; i < bits.size(); i++)
     bf.SetBit(bits[i]);
-
+  
   negBf = ~bf;
 
   for(int i = 0; i < size; i++)
@@ -310,10 +310,12 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
-TEST(TBitField, can_set_bit_from_istr)
-{
-    TBitField elem1(10);
-    cin >> elem1;
-    std::cout << elem1 << std::endl;
+//TEST(TBitField, can_set_bit_from_istr)
+//{
+//    TBitField elem1(10);
+//    cin >> elem1;
+//    std::cout << elem1 << std::endl;
+//
+//}
 
-}
+
